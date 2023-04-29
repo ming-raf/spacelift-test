@@ -9,6 +9,9 @@ RUN npm update -g
 RUN npm install -g aws-cdk
 RUN cdk --version
 
+# Install typescript
+RUN npm install -g typescript ts-node @types/node
+
 # Add Go
 COPY --from=golang:1.19-alpine /usr/local/go/ /usr/local/go/
 
