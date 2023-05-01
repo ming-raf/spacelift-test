@@ -19,3 +19,25 @@ resource "spacelift_space" "development" {
   # An optional description of a space.
   description = "This a child of the root space. It contains all the resources common to the development infrastructure."
 }
+
+resource "cdk_stack" "app-cdk" {
+  cloudformation {
+    entry_template_file = "cdk/cdk.out/CdkStack.template.json"
+    region              = "ap-southeast-2"
+    template_bucket     = "s3://spacelift-test"
+    stack_name          = "app-cdk"
+  }
+
+  autodeploy   = true
+  branch       = "main"
+  description  = "Typical CDK stack"
+  name         = "Application CDK"
+  project_root = "development"
+  repository   = "spacelift-test"
+  runner_image = "public.ecr.aws/s5n0e7e5/ming-spacelift:latest"
+  before_plan = [
+    "cdk bootstrap",
+    "cdk synth --output cdk/cdk.out",
+    "cdk ls",
+  ]
+}
