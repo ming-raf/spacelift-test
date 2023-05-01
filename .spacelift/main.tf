@@ -33,7 +33,7 @@ resource "spacelift_stack" "app-cdk" {
   description  = "Typical CDK stack"
   name         = "Application CDK"
   project_root = "development"
-  repository   = "spacelift-test"
+  repository   = "ming-raf/spacelift-test"
   runner_image = "public.ecr.aws/s5n0e7e5/ming-spacelift:latest"
   before_plan = [
     "cdk bootstrap",
