@@ -20,7 +20,7 @@ resource "spacelift_space" "development" {
   description = "This a child of the root space. It contains all the resources common to the development infrastructure."
 }
 
-resource "cdk_stack" "app-cdk" {
+resource "spacelift_stack" "app-cdk" {
   cloudformation {
     entry_template_file = "cdk/cdk.out/CdkStack.template.json"
     region              = "ap-southeast-2"
