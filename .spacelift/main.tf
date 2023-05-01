@@ -34,6 +34,7 @@ resource "spacelift_stack" "app-cdk" {
     stack_name          = "app-cdk"
   }
 
+  administrative = true
   autodeploy   = true
   space_id     = "development"
   branch       = "main"
