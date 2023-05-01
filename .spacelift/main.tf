@@ -21,6 +21,11 @@ resource "spacelift_space" "development" {
 }
 
 resource "spacelift_stack" "app-cdk" {
+
+  github_enterprise {
+    namespace = "ming-raf"
+  }
+
   cloudformation {
     entry_template_file = "cdk/cdk.out/CdkStack.template.json"
     region              = "ap-southeast-2"
@@ -33,7 +38,7 @@ resource "spacelift_stack" "app-cdk" {
   description  = "Typical CDK stack"
   name         = "Application CDK"
   project_root = "development"
-  repository   = "ming-raf/spacelift-test"
+  repository   = "spacelift-test"
   runner_image = "public.ecr.aws/s5n0e7e5/ming-spacelift:latest"
   before_plan = [
     "cdk bootstrap",
