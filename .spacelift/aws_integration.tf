@@ -6,6 +6,12 @@ locals {
 }
 
 resource "spacelift_stack" "this" {
+
+  github_enterprise {
+    namespace = "ming-raf"
+  }
+
+  autodeploy   = true
   name         = "AWS Integration"
   repository   = "spacelift-test"
   branch       = "main"
