@@ -6,12 +6,16 @@ terraform {
     }
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.48.0"
+      version = "~> 4.65.0"
     }
   }
 }
 
 provider "spacelift" {}
+
+provider "aws" {
+  region = "ap-southeast-2"
+}
 
 module "my_workerpool" {
   source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=v1.5.0"
