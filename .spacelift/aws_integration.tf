@@ -5,18 +5,6 @@ locals {
   role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.role_name}"
 }
 
-resource "spacelift_stack" "this" {
-
-  github_enterprise {
-    namespace = "ming-raf"
-  }
-
-  autodeploy   = true
-  name         = "AWS Integration"
-  repository   = "spacelift-test"
-  branch       = "main"
-}
-
 resource "spacelift_aws_integration" "this" {
   name = local.role_name
 
