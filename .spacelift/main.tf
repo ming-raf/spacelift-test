@@ -25,7 +25,7 @@ resource "spacelift_stack" "development_admin" {
 
   administrative = true
   autodeploy   = true
-  space_id     = "development"
+  space_id     = "root"
   branch       = "main"
   description  = "Admin stack to manage the development space"
   name         = "Development Admin"
@@ -42,7 +42,7 @@ resource "spacelift_stack" "staging_admin" {
 
   administrative = true
   autodeploy   = true
-  space_id     = "staging"
+  space_id     = "root"
   branch       = "main"
   description  = "Admin stack to manage the staging space"
   name         = "Staging Admin"
@@ -59,7 +59,7 @@ resource "spacelift_stack" "live_admin" {
 
   administrative = true
   autodeploy   = true
-  space_id     = "live"
+  space_id     = "root"
   branch       = "main"
   description  = "Admin stack to manage the live space"
   name         = "Live Admin"
