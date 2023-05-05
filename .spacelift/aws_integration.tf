@@ -29,23 +29,3 @@ resource "aws_iam_role_policy_attachment" "this" {
   role       = aws_iam_role.this.name
 }
 
-
-# The spacelift_aws_integration_attachment_external_id data source is used to help generate a trust policy for the integration
-data "spacelift_aws_integration_attachment_external_id" "this" {
-  integration_id = spacelift_aws_integration.this.id
-  stack_id       = spacelift_stack.this.id
-  read           = true
-  write          = true
-}
-
-resource "spacelift_aws_integration_attachment" "this" {
-  integration_id = spacelift_aws_integration.this.id
-  stack_id       = spacelift_stack.this.id
-  read           = true
-  write          = true
-
-  # The role needs to exist before we attach since we test role assumption during attachment.
-  depends_on = [
-    aws_iam_role.this
-  ]
-}
