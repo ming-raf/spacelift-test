@@ -17,14 +17,53 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
-resource "spacelift_space" "development" {
-  name = "development"
+resource "spacelift_stack" "development_admin" {
 
-  # Every account has a root space that serves as the root for the space tree.
-  # Except for the root space, all the other spaces must define their parents.
-  parent_space_id = "root"
-  inherit_entities = true
+  github_enterprise {
+    namespace = "ming-raf"
+  }
 
-  # An optional description of a space.
-  description = "This a child of the root space. It contains all the resources common to the development infrastructure."
+  administrative = true
+  autodeploy   = true
+  space_id     = "development"
+  branch       = "main"
+  description  = "Admin stack to manage the development space"
+  name         = "Development Admin"
+  project_root = ".spacelift/spaces/development"
+  repository   = "spacelift-test"
+  terraform_version = "1.4.6"
+}
+
+resource "spacelift_stack" "staging_admin" {
+
+  github_enterprise {
+    namespace = "ming-raf"
+  }
+
+  administrative = true
+  autodeploy   = true
+  space_id     = "staging"
+  branch       = "main"
+  description  = "Admin stack to manage the staging space"
+  name         = "Staging Admin"
+  project_root = ".spacelift/spaces/staging"
+  repository   = "spacelift-test"
+  terraform_version = "1.4.6"
+}
+
+resource "spacelift_stack" "live_admin" {
+
+  github_enterprise {
+    namespace = "ming-raf"
+  }
+
+  administrative = true
+  autodeploy   = true
+  space_id     = "live"
+  branch       = "main"
+  description  = "Admin stack to manage the live space"
+  name         = "Live Admin"
+  project_root = ".spacelift/spaces/live"
+  repository   = "spacelift-test"
+  terraform_version = "1.4.6"
 }
