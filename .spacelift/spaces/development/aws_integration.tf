@@ -1,5 +1,5 @@
-module "app_cdk_stack" {
-  source = "./modules"
+module "stacks" {
+  source = "./stacks"
 }
 
 data "aws_caller_identity" "current" {}
@@ -36,14 +36,14 @@ resource "aws_iam_role_policy_attachment" "this" {
 # The spacelift_aws_integration_attachment_external_id data source is used to help generate a trust policy for the integration
 data "spacelift_aws_integration_attachment_external_id" "this" {
   integration_id = spacelift_aws_integration.this.id
-  stack_id       = app_cdk_stack.spacelift_stack.this.id
+  stack_id       = module.stacks.app_cdk_stack_id
   read           = true
   write          = true
 }
 
 resource "spacelift_aws_integration_attachment" "this" {
   integration_id = spacelift_aws_integration.this.id
-  stack_id       = app_cdk_stack.spacelift_stack.this.id
+  stack_id       = module.stacks.app_cdk_stack_id
   read           = true
   write          = true
 

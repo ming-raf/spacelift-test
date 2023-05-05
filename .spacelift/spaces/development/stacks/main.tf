@@ -11,8 +11,6 @@ terraform {
   }
 }
 
-provider "spacelift" {}
-
 provider "aws" {
   region = "ap-southeast-2"
 }

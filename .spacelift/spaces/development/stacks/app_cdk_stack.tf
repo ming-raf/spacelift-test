@@ -21,7 +21,7 @@
 #   vpc_subnets       = var.worker_pool_subnets
 # }
 
-resource "spacelift_stack" "this" {
+resource "spacelift_stack" "app_cdk" {
 
   github_enterprise {
     namespace = "ming-raf"
@@ -47,6 +47,11 @@ resource "spacelift_stack" "this" {
     "cdk synth --output cdk/cdk.out",
     "cdk ls",
   ]
+}
+
+output "app_cdk_stack_id" {
+  description = "app_cdk stack id"
+  value       = spacelift_stack.app_cdk.id
 }
 
 
