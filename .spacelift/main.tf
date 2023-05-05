@@ -17,6 +17,18 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
+resource "spacelift_space" "development" {
+  name = "development"
+
+  # Every account has a root space that serves as the root for the space tree.
+  # Except for the root space, all the other spaces must define their parents.
+  parent_space_id = "root"
+  inherit_entities = true
+
+  # An optional description of a space.
+  description = "This a child of the root space. It contains all the resources common to the development infrastructure."
+}
+
 resource "spacelift_stack" "development_admin" {
 
   github_enterprise {
@@ -25,7 +37,7 @@ resource "spacelift_stack" "development_admin" {
 
   administrative = true
   autodeploy   = true
-  space_id     = "root"
+  space_id     = "development"
   branch       = "main"
   description  = "Admin stack to manage the development space"
   name         = "Development Admin"
