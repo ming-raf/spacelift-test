@@ -21,6 +21,10 @@
 #   vpc_subnets       = var.worker_pool_subnets
 # }
 
+data "spacelift_space_by_path" "development" {
+  space_path = "root/development"
+}
+
 resource "spacelift_stack" "app_cdk" {
 
   github_enterprise {
@@ -35,7 +39,7 @@ resource "spacelift_stack" "app_cdk" {
   }
 
   autodeploy   = true
-  space_id     = "development"
+  space_id     = data.spacelift_space_by_path.development.id
   branch       = "main"
   description  = "Typical CDK stack"
   name         = "Application CDK"

@@ -9,11 +9,15 @@ locals {
   role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.role_name}"
 }
 
+data "spacelift_space_by_path" "development" {
+  space_path = "root/development"
+}
+
 resource "spacelift_aws_integration" "this" {
   name = local.role_name
 
   # We need to set this manually rather than referencing the role to avoid a circular dependency
-  space_id                       = "development"
+  space_id                       = data.spacelift_space_by_path.development.id
   role_arn                       = local.role_arn
   generate_credentials_in_worker = false
 }
