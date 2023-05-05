@@ -13,6 +13,7 @@ resource "spacelift_aws_integration" "this" {
   name = local.role_name
 
   # We need to set this manually rather than referencing the role to avoid a circular dependency
+  space_id                       = "development"
   role_arn                       = local.role_arn
   generate_credentials_in_worker = false
 }
