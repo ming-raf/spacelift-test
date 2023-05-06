@@ -36,7 +36,7 @@ resource "spacelift_stack" "ec2_worker_pool" {
   space_id       = data.spacelift_space_by_path.development.id
   branch         = "main"
   name           = "EC2 Worker Pool (Development)"
-  project_root   = "./stacks/worker_pool_stack"
+  project_root   = "./spacelift/spaces/development/stacks/worker_pool_stack"
   repository     = "spacelift-test"
 }
 
