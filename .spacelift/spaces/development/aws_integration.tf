@@ -26,7 +26,7 @@ resource "aws_iam_role" "this" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "power_user" {
+resource "aws_iam_role_policy_attachment" "this" {
   policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
   role       = aws_iam_role.this.name
 }
