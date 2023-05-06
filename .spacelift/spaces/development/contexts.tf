@@ -1,6 +1,7 @@
 resource "spacelift_context" "spacelift-worker-pool" {
   description = "Configuration for Spacelift worker pool (development)"
   name        = "Development Worker Pool"
+  space_id    = data.spacelift_space_by_path.development.id
 }
 
 resource "spacelift_context_attachment" "attachment" {

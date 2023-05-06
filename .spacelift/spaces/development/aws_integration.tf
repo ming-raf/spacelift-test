@@ -5,10 +5,6 @@ locals {
   role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.role_name}"
 }
 
-data "spacelift_space_by_path" "development" {
-  space_path = "root/development"
-}
-
 resource "spacelift_aws_integration" "this" {
   name = local.role_name
 

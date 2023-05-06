@@ -27,6 +27,10 @@ module "stacks" {
   source = "./stacks"
 }
 
+data "spacelift_space_by_path" "development" {
+  space_path = "root/development"
+}
+
 # variable "worker_pool_config" {
 #   default = ""
 # }
