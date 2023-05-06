@@ -92,7 +92,6 @@ resource "aws_route_table_association" "private_subnet_association" {
 }
 
 resource "aws_security_group" "open_sg" {
-  name_prefix = "sg-"
   description = "Open all security group"
 
   ingress {
