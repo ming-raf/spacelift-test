@@ -39,14 +39,14 @@ resource "aws_iam_role_policy_attachment" "administrator" {
 # The spacelift_aws_integration_attachment_external_id data source is used to help generate a trust policy for the integration
 data "spacelift_aws_integration_attachment_external_id" "this" {
   integration_id = spacelift_aws_integration.this.id
-  stack_id       = module.stacks.app_cdk_stack_id
+  stack_id       = spacelift_stack.app_cdk.id
   read           = true
   write          = true
 }
 
 resource "spacelift_aws_integration_attachment" "this" {
   integration_id = spacelift_aws_integration.this.id
-  stack_id       = module.stacks.app_cdk_stack_id
+  stack_id       = spacelift_stack.app_cdk.id
   read           = true
   write          = true
 
