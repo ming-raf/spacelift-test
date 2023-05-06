@@ -6,9 +6,14 @@ resource "spacelift_worker_pool" "aws_ec2" {
   space_id    = data.spacelift_space_by_path.development.id
 }
 
-variable "SPACELIFT_POOL_PRIVATE_KEY" {
-  type = string
+data "spacelift_environment_variable" "private_key" {
+  context_id = local.development_worker_pool_context_id
+  name       = "TF_VAR_SPACELIFT_POOL_PRIVATE_KEY"
 }
+
+# variable "SPACELIFT_POOL_PRIVATE_KEY" {
+#   type = string
+# }
 
 variable "worker_pool_security_groups" {
   type = list(string)
@@ -25,7 +30,7 @@ module "my_workerpool" {
 
   configuration = <<-EOT
     export SPACELIFT_TOKEN="${spacelift_worker_pool.aws_ec2.config}"
-    export SPACELIFT_POOL_PRIVATE_KEY="${var.SPACELIFT_POOL_PRIVATE_KEY}"
+    export SPACELIFT_POOL_PRIVATE_KEY="${spacelift_environment_variable.private_key.value}"
   EOT
 
   min_size          = 1
