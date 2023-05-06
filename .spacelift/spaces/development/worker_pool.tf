@@ -6,11 +6,11 @@ resource "spacelift_worker_pool" "aws_ec2" {
   space_id    = data.spacelift_space_by_path.development.id
 }
 
-# data "spacelift_environment_variable" "private_key" {
-#   context_id = local.development_worker_pool_context_id
-#   name       = "TF_VAR_SPACELIFT_POOL_PRIVATE_KEY"
-#   depends_on = [ spacelift_context_attachment.worker_pool_worker_pool ]
-# }
+data "spacelift_environment_variable" "private_key" {
+  context_id = local.development_worker_pool_context_id
+  name       = "TF_VAR_SPACELIFT_POOL_PRIVATE_KEY"
+  depends_on = [ spacelift_context_attachment.worker_pool_worker_pool ]
+}
 
 # variable "SPACELIFT_POOL_PRIVATE_KEY" {
 #   type = string
