@@ -4,7 +4,7 @@ resource "spacelift_context" "spacelift-worker-pool" {
   space_id    = data.spacelift_space_by_path.development.id
 }
 
-resource "spacelift_context_attachment" "attachment" {
+resource "spacelift_context_attachment" "worker_pool_worker_pool" {
   context_id = spacelift_context.spacelift-worker-pool.id
   stack_id   = spacelift_stack.ec2_worker_pool.id
   priority   = 0
