@@ -16,7 +16,7 @@ module "my_workerpool" {
 
   configuration = <<-EOT
     export SPACELIFT_TOKEN="${spacelift_worker_pool.aws_ec2.config}"
-    export SPACELIFT_POOL_PRIVATE_KEY="${base64encode(var.SPACELIFT_POOL_PRIVATE_KEY)}"
+    export SPACELIFT_POOL_PRIVATE_KEY="${var.SPACELIFT_POOL_PRIVATE_KEY}"
   EOT
 
   min_size          = 1
