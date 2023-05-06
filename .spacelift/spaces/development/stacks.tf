@@ -42,7 +42,7 @@ resource "spacelift_stack" "app_cdk" {
   project_root   = "cdk"
   repository     = "spacelift-test"
   runner_image   = "public.ecr.aws/s5n0e7e5/ming-spacelift:latest"
-  worker_pool_id = spacelift_worker_pool.aws_ec2.id
+  # worker_pool_id = spacelift_worker_pool.aws_ec2.id
   before_plan = [
     "npm install aws-cdk-lib",
     "cdk bootstrap",
