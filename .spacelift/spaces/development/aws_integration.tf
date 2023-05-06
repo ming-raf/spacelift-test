@@ -21,6 +21,7 @@ resource "aws_iam_role" "this" {
     Version = "2012-10-17"
     Statement = [
       jsondecode(data.spacelift_aws_integration_attachment_external_id.this.assume_role_policy_statement),
+      jsondecode(data.spacelift_aws_integration_attachment_external_id.ec2_worker_pool.assume_role_policy_statement),
     ]
   })
 }
@@ -48,6 +49,13 @@ resource "spacelift_aws_integration_attachment" "this" {
   depends_on = [
     aws_iam_role.this
   ]
+}
+
+data "spacelift_aws_integration_attachment_external_id" "ec2_worker_pool" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = spacelift_stack.ec2_worker_pool.id
+  read           = true
+  write          = true
 }
 
 resource "spacelift_aws_integration_attachment" "ec2_worker_pool" {
