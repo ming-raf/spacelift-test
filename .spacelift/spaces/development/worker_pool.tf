@@ -6,11 +6,11 @@ resource "spacelift_worker_pool" "aws_ec2" {
   space_id    = data.spacelift_space_by_path.development.id
 }
 
-data "spacelift_environment_variable" "private_key" {
-  context_id = local.development_worker_pool_context_id
-  name       = "TF_VAR_SPACELIFT_POOL_PRIVATE_KEY"
-  depends_on = [ spacelift_context_attachment.worker_pool_worker_pool ]
-}
+# data "spacelift_environment_variable" "private_key" {
+#   context_id = local.development_worker_pool_context_id
+#   name       = "TF_VAR_SPACELIFT_POOL_PRIVATE_KEY"
+#   depends_on = [ spacelift_context_attachment.worker_pool_worker_pool ]
+# }
 
 # variable "SPACELIFT_POOL_PRIVATE_KEY" {
 #   type = string
@@ -26,18 +26,18 @@ variable "worker_pool_subnets" {
   default = [ "subnet-06337061", "subnet-7c864124", "subnet-88b0cdc1" ]
 }
 
-module "my_workerpool" {
-  source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=v1.5.0"
+# module "my_workerpool" {
+#   source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=v1.5.0"
 
-  configuration = <<-EOT
-    export SPACELIFT_TOKEN="${spacelift_worker_pool.aws_ec2.config}"
-    export SPACELIFT_POOL_PRIVATE_KEY="${data.spacelift_environment_variable.private_key.value}"
-  EOT
+#   configuration = <<-EOT
+#     export SPACELIFT_TOKEN="${spacelift_worker_pool.aws_ec2.config}"
+#     export SPACELIFT_POOL_PRIVATE_KEY="${data.spacelift_environment_variable.private_key.value}"
+#   EOT
 
-  min_size          = 1
-  max_size          = 5
-  worker_pool_id    = spacelift_worker_pool.aws_ec2.id
-  security_groups   = var.worker_pool_security_groups
-  vpc_subnets       = var.worker_pool_subnets
-  depends_on = [ spacelift_context_attachment.worker_pool_worker_pool ]
-}
+#   min_size          = 1
+#   max_size          = 5
+#   worker_pool_id    = spacelift_worker_pool.aws_ec2.id
+#   security_groups   = var.worker_pool_security_groups
+#   vpc_subnets       = var.worker_pool_subnets
+#   depends_on = [ spacelift_context_attachment.worker_pool_worker_pool ]
+# }
