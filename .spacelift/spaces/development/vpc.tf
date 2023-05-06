@@ -99,7 +99,7 @@ resource "aws_route" "nat_gateway_route" {
 
 resource "aws_security_group" "open_sg" {
   description = "Open all security group"
-
+  vpc_id = aws_vpc.vpc.id
   ingress {
     from_port   = 80
     to_port     = 80
