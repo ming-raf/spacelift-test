@@ -1,6 +1,6 @@
 
 resource "spacelift_worker_pool" "aws_ec2" {
-  name        = "AWS EC2 Worker Pool"
+  name        = "AWS EC2 Worker Pool (Development)"
   csr         = filebase64("../../spacelift.csr")
   description = "Used for all type jobs"
   space_id    = data.spacelift_space_by_path.development.id
