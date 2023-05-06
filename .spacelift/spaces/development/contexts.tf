@@ -1,7 +1,3 @@
-module "stacks" {
-  source = "./stacks"
-}
-
 resource "spacelift_context" "spacelift-worker-pool" {
   description = "Configuration for Spacelift worker pool (development)"
   name        = "Development Worker Pool"

@@ -23,6 +23,10 @@ resource "spacelift_worker_pool" "aws-ec2" {
   description = "Used for all type jobs"
 }
 
+module "stacks" {
+  source = "./stacks"
+}
+
 # variable "worker_pool_config" {
 #   default = ""
 # }

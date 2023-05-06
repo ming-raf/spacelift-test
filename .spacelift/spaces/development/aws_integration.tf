@@ -1,7 +1,3 @@
-module "stacks" {
-  source = "./stacks"
-}
-
 data "aws_caller_identity" "current" {}
 
 locals {
