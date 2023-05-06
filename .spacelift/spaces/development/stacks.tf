@@ -51,6 +51,12 @@ resource "spacelift_stack" "app_cdk" {
   ]
 }
 
+resource "spacelift_drift_detection" "app_cdk" {
+  reconcile = true
+  stack_id  = spacelift_stack.core-infra-production.id
+  schedule  = ["*/1 * * * *"]
+}
+
 resource "spacelift_run" "app_cdk" {
   stack_id = spacelift_stack.app_cdk.id
 
