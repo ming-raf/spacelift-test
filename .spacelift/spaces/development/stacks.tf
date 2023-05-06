@@ -1,7 +1,3 @@
-module "worker_pool" {
-  source = "./worker_pool"
-}
-
 resource "spacelift_stack" "ec2_worker_pool" {
 
   github_enterprise {
@@ -34,7 +30,7 @@ resource "spacelift_stack" "app_cdk" {
   cloudformation {
     entry_template_file = "cdk.out/CdkStack.template.json"
     region              = "ap-southeast-2"
-    template_bucket     = "spacelift-test"
+    template_bucket     = "s3://spacelift-test"
     stack_name          = "app-cdk"
   }
 
@@ -46,18 +42,12 @@ resource "spacelift_stack" "app_cdk" {
   project_root = "cdk"
   repository   = "spacelift-test"
   runner_image = "public.ecr.aws/s5n0e7e5/ming-spacelift:latest"
-  worker_pool_id = module.worker_pool.worker_pool_id
   before_plan  = [
     "npm install aws-cdk-lib",
     "cdk bootstrap",
     "cdk synth --output cdk/cdk.out",
     "cdk ls",
   ]
-}
-
-resource "spacelift_stack_dependency" "app_cdk_ec2_worker_pool" {
-  stack_id            = spacelift_stack.app_cdk.id
-  depends_on_stack_id = spacelift_stack.ec2_worker_pool.id
 }
 
 resource "spacelift_run" "app_cdk" {
