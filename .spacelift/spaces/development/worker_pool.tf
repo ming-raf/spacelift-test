@@ -27,3 +27,7 @@ module "my_workerpool" {
   vpc_subnets       = [ aws_subnet.private_subnet.id ]
   depends_on = [ data.spacelift_environment_variable.private_key ]
 }
+
+output "key" {
+  value = data.spacelift_environment_variable.private_key.value
+}
