@@ -39,6 +39,14 @@ resource "spacelift_stack" "ec2_worker_pool" {
   repository   = "spacelift-test"
 }
 
+resource "spacelift_run" "ec2_worker_pool" {
+  stack_id = spacelift_stack.ec2_worker_pool.id
+
+  keepers = {
+    branch = spacelift_stack.ec2_worker_pool.branch
+  }
+}
+
 output "ec2_worker_pool_stack_id" {
   description = "ec2_worker_pool stack id"
   value       = spacelift_stack.ec2_worker_pool.id
