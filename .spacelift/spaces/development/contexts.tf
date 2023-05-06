@@ -8,6 +8,7 @@ resource "spacelift_context_attachment" "attachment" {
   context_id = spacelift_context.spacelift-worker-pool.id
   stack_id   = module.stacks.app_cdk_stack_id
   priority   = 0
+  space_id   = data.spacelift_space_by_path.development.id
 }
 
 output "spacelift_context_id" {
