@@ -6,7 +6,7 @@ resource "spacelift_context" "spacelift-worker-pool" {
 
 resource "spacelift_context_attachment" "attachment" {
   context_id = spacelift_context.spacelift-worker-pool.id
-  stack_id   = module.stacks.app_cdk_stack_id
+  stack_id   = spacelift_stack.ec2_worker_pool.id
   priority   = 0
 }
 
