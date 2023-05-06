@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     spacelift = {
-      source = "spacelift-io/spacelift"
+      source  = "spacelift-io/spacelift"
       version = "1.1.5"
     }
     aws = {
@@ -17,19 +17,22 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
+data "spacelift_space_by_path" "development" {
+  space_path = "root/development"
+}
+
 resource "spacelift_worker_pool" "aws-ec2" {
   name        = "AWS EC2 Worker Pool"
   csr         = filebase64("../../spacelift.csr")
   description = "Used for all type jobs"
+  space_id    = data.spacelift_space_by_path.development.id
 }
 
 module "stacks" {
   source = "./stacks"
 }
 
-data "spacelift_space_by_path" "development" {
-  space_path = "root/development"
-}
+
 
 # variable "worker_pool_config" {
 #   default = ""
