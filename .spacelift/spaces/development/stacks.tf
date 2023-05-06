@@ -1,26 +1,3 @@
-# resource "spacelift_stack" "ec2_worker_pool" {
-
-#   github_enterprise {
-#     namespace = "ming-raf"
-#   }
-
-#   administrative = true
-#   autodeploy     = true
-#   space_id       = data.spacelift_space_by_path.development.id
-#   branch         = "main"
-#   name           = "EC2 Worker Pool (Development)"
-#   project_root   = ".spacelift/spaces/development/worker_pool"
-#   repository     = "spacelift-test"
-# }
-
-# resource "spacelift_run" "ec2_worker_pool" {
-#   stack_id = spacelift_stack.ec2_worker_pool.id
-
-#   keepers = {
-#     branch = spacelift_stack.ec2_worker_pool.branch
-#   }
-# }
-
 resource "spacelift_stack" "app_cdk" {
 
   github_enterprise {
@@ -53,7 +30,7 @@ resource "spacelift_stack" "app_cdk" {
 
 resource "spacelift_drift_detection" "app_cdk" {
   reconcile = true
-  stack_id  = spacelift_stack.core-infra-production.id
+  stack_id  = spacelift_stack.app_cdk.id
   schedule  = ["*/1 * * * *"]
 }
 
