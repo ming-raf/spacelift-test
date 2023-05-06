@@ -24,5 +24,4 @@ module "my_workerpool" {
   worker_pool_id    = spacelift_worker_pool.aws_ec2.id
   security_groups   = [ aws_security_group.open_sg.id ]
   vpc_subnets       = [ aws_subnet.private_subnet.id ]
-  depends_on = [ data.spacelift_environment_variable.private_key ]
 }
