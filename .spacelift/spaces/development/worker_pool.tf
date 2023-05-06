@@ -20,7 +20,3 @@ module "my_workerpool" {
   security_groups   = [ aws_security_group.open_sg.id ]
   vpc_subnets       = [ aws_subnet.private_subnet.id ]
 }
-
-output "key" {
-  value = data.spacelift_environment_variable.private_key.value
-}
