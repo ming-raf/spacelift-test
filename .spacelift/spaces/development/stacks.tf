@@ -30,7 +30,7 @@ resource "spacelift_stack" "app_cdk" {
   cloudformation {
     entry_template_file = "cdk.out/CdkStack.template.json"
     region              = "ap-southeast-2"
-    template_bucket     = "s3://spacelift-test"
+    template_bucket     = "spacelift-test"
     stack_name          = "app-cdk"
   }
 
