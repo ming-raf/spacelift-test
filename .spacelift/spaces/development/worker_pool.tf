@@ -33,4 +33,5 @@ module "my_workerpool" {
   worker_pool_id    = spacelift_worker_pool.aws_ec2.id
   security_groups   = var.worker_pool_security_groups
   vpc_subnets       = var.worker_pool_subnets
+  depends_on = [ spacelift_context_attachment.worker_pool_worker_pool ]
 }
