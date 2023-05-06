@@ -50,7 +50,7 @@ resource "spacelift_aws_integration_attachment" "this" {
   ]
 }
 
-resource "spacelift_aws_integration_attachment" "this" {
+resource "spacelift_aws_integration_attachment" "ec2_worker_pool" {
   integration_id = spacelift_aws_integration.this.id
   stack_id       = spacelift_stack.ec2_worker_pool.id
   read           = true
