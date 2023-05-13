@@ -3,7 +3,7 @@ variable "spacelift_stack_id" {
 }
 
 locals {
-  development_worker_pool_context_id = "development-worker-pool-manual"
+  development_worker_pool_context_id = "manual"
 }
 
 resource "spacelift_context_attachment" "worker_pool_worker_pool" {
