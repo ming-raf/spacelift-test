@@ -20,8 +20,8 @@ resource "spacelift_stack" "app_cdk" {
   repository     = "spacelift-test"
   runner_image   = "public.ecr.aws/s5n0e7e5/ming-spacelift:latest"
   worker_pool_id = spacelift_worker_pool.aws_ec2.id
+  before_init = [ "curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh" ]
   before_plan = [
-    "curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh",
     "npm install aws-cdk-lib",
     "cdk bootstrap",
     "cdk synth --output cdk/cdk.out",
