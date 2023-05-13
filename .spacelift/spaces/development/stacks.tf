@@ -29,6 +29,12 @@ resource "spacelift_stack" "app_cdk" {
   labels = [ "infracost" ]
 }
 
+resource "spacelift_context_attachment" "app_cdk" {
+  context_id = local.development_worker_pool_context_id
+  stack_id   = spacelift_stack.app_cdk.id
+  priority   = 0
+}
+
 resource "spacelift_drift_detection" "app_cdk" {
   reconcile = true
   stack_id  = spacelift_stack.app_cdk.id
