@@ -26,6 +26,7 @@ resource "spacelift_stack" "app_cdk" {
     "cdk synth --output cdk/cdk.out",
     "cdk ls",
   ]
+  labels = [ "infracost" ]
 }
 
 resource "spacelift_drift_detection" "app_cdk" {
