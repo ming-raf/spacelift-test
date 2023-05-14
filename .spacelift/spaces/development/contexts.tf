@@ -41,3 +41,10 @@ resource "spacelift_environment_variable" "capability_iam" {
   value      = "1"
   write_only = false
 }
+
+resource "spacelift_environment_variable" "capability_named_iam" {
+  context_id = spacelift_context.lambda_cf.id
+  name       = "CF_CAPABILITY_NAMED_IAM"
+  value      = "1"
+  write_only = false
+}
