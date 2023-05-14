@@ -12,6 +12,19 @@ resource "spacelift_context_attachment" "worker_pool_worker_pool" {
   priority   = 0
 }
 
+resource "spacelift_context_attachment" "app_cdk" {
+  context_id = local.development_worker_pool_context_id
+  stack_id   = spacelift_stack.app_cdk.id
+  priority   = 0
+}
+
+resource "spacelift_context_attachment" "lambda_cf_dev" {
+  context_id = local.development_worker_pool_context_id
+  stack_id   = spacelift_stack.lambda_cf.id
+  priority   = 0
+}
+
+
 resource "spacelift_context" "lambda_cf" {
   name        = "Lambda CloudFormation"
 }

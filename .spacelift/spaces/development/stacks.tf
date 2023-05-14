@@ -30,12 +30,6 @@ resource "spacelift_stack" "app_cdk" {
   labels = [ "infracost" ]
 }
 
-resource "spacelift_context_attachment" "app_cdk" {
-  context_id = local.development_worker_pool_context_id
-  stack_id   = spacelift_stack.app_cdk.id
-  priority   = 0
-}
-
 resource "spacelift_drift_detection" "app_cdk" {
   reconcile = true
   stack_id  = spacelift_stack.app_cdk.id
@@ -70,12 +64,6 @@ resource "spacelift_stack" "lambda_cf" {
   name           = "Lambda CloudFormation"
   repository     = "spacelift-test"
   labels = [ "infracost" ]
-}
-
-resource "spacelift_context_attachment" "lambda_cf" {
-  context_id = local.development_worker_pool_context_id
-  stack_id   = spacelift_stack.lambda_cf.id
-  priority   = 0
 }
 
 output "app_cdk_stack_id" {
