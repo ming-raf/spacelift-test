@@ -1,6 +1,4 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Capabilities:
-  - CAPABILITY_IAM
 Resources:
   MyLambdaRole:
     Type: AWS::IAM::Role
