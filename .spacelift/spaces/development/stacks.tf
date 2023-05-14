@@ -66,6 +66,21 @@ resource "spacelift_stack" "lambda_cf" {
   labels = [ "infracost" ]
 }
 
+resource "spacelift_stack" "lambda_terraform" {
+
+  github_enterprise {
+    namespace = "ming-raf"
+  }
+
+  autodeploy     = true
+  space_id       = data.spacelift_space_by_path.development.id
+  branch         = "main"
+  name           = "Lambda Terraform"
+  repository     = "spacelift-test"
+  project_root = "terraform"
+  labels = [ "infracost" ]
+}
+
 output "app_cdk_stack_id" {
   description = "app_cdk stack id"
   value       = spacelift_stack.app_cdk.id

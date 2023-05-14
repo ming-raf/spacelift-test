@@ -24,6 +24,12 @@ resource "spacelift_context_attachment" "lambda_cf_dev" {
   priority   = 0
 }
 
+resource "spacelift_context_attachment" "lambda_terraform_dev" {
+  context_id = local.development_worker_pool_context_id
+  stack_id   = spacelift_stack.lambda_terraform.id
+  priority   = 0
+}
+
 resource "spacelift_context" "lambda_cf" {
   name     = "Lambda CloudFormation"
   space_id = data.spacelift_space_by_path.development.id
@@ -32,6 +38,12 @@ resource "spacelift_context" "lambda_cf" {
 resource "spacelift_context_attachment" "lambda_cf" {
   context_id = spacelift_context.lambda_cf.id
   stack_id   = spacelift_stack.lambda_cf.id
+  priority   = 0
+}
+
+resource "spacelift_context_attachment" "lambda_terraform" {
+  context_id = spacelift_context.lambda_terraform.id
+  stack_id   = spacelift_stack.lambda_terraform.id
   priority   = 0
 }
 
