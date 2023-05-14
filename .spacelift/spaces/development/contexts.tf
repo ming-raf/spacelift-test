@@ -42,7 +42,7 @@ resource "spacelift_context_attachment" "lambda_cf" {
 }
 
 resource "spacelift_context_attachment" "lambda_terraform" {
-  context_id = spacelift_context.lambda_terraform.id
+  context_id = spacelift_context.lambda_cf.id
   stack_id   = spacelift_stack.lambda_terraform.id
   priority   = 0
 }
