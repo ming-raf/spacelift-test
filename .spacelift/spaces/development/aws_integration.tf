@@ -55,13 +55,6 @@ resource "spacelift_aws_integration_attachment" "this" {
   ]
 }
 
-data "spacelift_aws_integration_attachment_external_id" "lambda_cf" {
-  integration_id = spacelift_aws_integration.this.id
-  stack_id       = spacelift_stack.lambda_cf.id
-  read           = true
-  write          = true
-}
-
 resource "spacelift_aws_integration_attachment" "lambda_cf" {
   integration_id = spacelift_aws_integration.this.id
   stack_id       = spacelift_stack.lambda_cf.id
