@@ -50,12 +50,35 @@ resource "spacelift_run" "app_cdk" {
   }
 }
 
+
+resource "spacelift_stack" "lambda_cf" {
+
+  github_enterprise {
+    namespace = "ming-raf"
+  }
+
+  cloudformation {
+    entry_template_file = "cloudformation/lambda.yml"
+    region              = "ap-southeast-2"
+    template_bucket     = "spacelift-test"
+    stack_name          = "Lambda-Test"
+  }
+
+  autodeploy     = true
+  space_id       = data.spacelift_space_by_path.development.id
+  branch         = "main"
+  name           = "Lambda CloudFormation"
+  repository     = "spacelift-test"
+  labels = [ "infracost" ]
+}
+
+resource "spacelift_context_attachment" "lambda_cf" {
+  context_id = local.development_worker_pool_context_id
+  stack_id   = spacelift_stack.lambda_cf.id
+  priority   = 0
+}
+
 output "app_cdk_stack_id" {
   description = "app_cdk stack id"
   value       = spacelift_stack.app_cdk.id
 }
-
-# output "ec2_worker_pool_stack_id" {
-#   description = "ec2_worker_pool stack id"
-#   value       = spacelift_stack.ec2_worker_pool.id
-# }
