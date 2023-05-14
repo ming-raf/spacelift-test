@@ -24,19 +24,19 @@ resource "spacelift_context_attachment" "lambda_cf_dev" {
   priority   = 0
 }
 
-
 resource "spacelift_context" "lambda_cf" {
-  name        = "Lambda CloudFormation"
+  name     = "Lambda CloudFormation"
+  space_id = data.spacelift_space_by_path.development
 }
 
 resource "spacelift_context_attachment" "lambda_cf" {
   context_id = spacelift_context.lambda_cf.id
-  stack_id = spacelift_stack.lambda_cf.id
+  stack_id   = spacelift_stack.lambda_cf.id
   priority   = 0
 }
 
 resource "spacelift_environment_variable" "capability_iam" {
-  context_id   = spacelift_context.lambda_cf.id
+  context_id = spacelift_context.lambda_cf.id
   name       = "CF_CAPABILITY_IAM"
   value      = "1"
   write_only = false
