@@ -26,7 +26,7 @@ resource "spacelift_context_attachment" "lambda_cf_dev" {
 
 resource "spacelift_context" "lambda_cf" {
   name     = "Lambda CloudFormation"
-  space_id = data.spacelift_space_by_path.development
+  space_id = data.spacelift_space_by_path.development.id
 }
 
 resource "spacelift_context_attachment" "lambda_cf" {
