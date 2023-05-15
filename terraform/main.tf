@@ -29,11 +29,11 @@ resource "aws_api_gateway_method" "example_method" {
   authorization = "NONE"
 }
 
-resource "aws_lambda_function" "example_lambda" {
-  function_name = "example-lambda"
-  runtime      = "python3.8"
-  handler      = "lambda_function.lambda_handler"
-  inline_code  = <<EOF
+data "archive_file" "lambda_zip_inline" {
+  type        = "zip"
+  output_path = "/tmp/lambda_zip_inline.zip"
+  source {
+    content  = <<EOF
 import json
 
 def lambda_handler(event, context):
@@ -43,6 +43,17 @@ def lambda_handler(event, context):
         'body': json.dumps('Hello from Lambda!')
     }
 EOF
+    filename = "index.py"
+  }
+}
+
+resource "aws_lambda_function" "example_lambda" {
+  function_name = "example-lambda"
+  runtime      = "python3.8"
+  handler      = "lambda_function.lambda_handler"
+  role = aws_iam_role.example_lambda_role.arn
+  filename         = "${data.archive_file.lambda_zip_inline.output_path}"
+  source_code_hash = "${data.archive_file.lambda_zip_inline.output_base64sha256}"
 }
 
 resource "aws_iam_role" "example_lambda_role" {
