@@ -11,6 +11,15 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
+resource "aws_instance" "example" {
+  ami           = "ami-0c94855ba95c574c8" 
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "example-instance"
+  }
+}
+
 resource "aws_api_gateway_rest_api" "example_api" {
   name        = "example-api"
   description = "Example API Gateway"
@@ -108,4 +117,6 @@ resource "aws_api_gateway_integration_response" "example_integration_response" {
   response_templates  = {
     "application/json" = ""
   }
+
+  depends_on = [ aws_api_gateway_integration.example_integration ]
 }
