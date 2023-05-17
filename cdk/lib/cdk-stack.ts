@@ -7,6 +7,7 @@ export class CdkStack extends Stack {
     super(scope, id, props);
 
     const vpc = ec2.Vpc.fromLookup(this, 'Vpc', {
+      region: "ap-southeast-2",
       vpcId: "vpc-04067621ba51a40e8"
     });
 
