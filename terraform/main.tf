@@ -13,7 +13,7 @@ provider "aws" {
 
 resource "aws_instance" "example" {
   ami           = "ami-0dccf6019d76274e9"
-  instance_type = "t4g.nano"
+  instance_type = "t4g.micro"
 
   tags = {
     Name = "example-instance"
