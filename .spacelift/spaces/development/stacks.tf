@@ -77,6 +77,7 @@ resource "spacelift_stack" "lambda_terraform" {
   branch         = "main"
   name           = "Lambda Terraform"
   repository     = "spacelift-test"
+  worker_pool_id = spacelift_worker_pool.aws_ec2.id
   project_root = "terraform"
   labels = [ "infracost" ]
 }
