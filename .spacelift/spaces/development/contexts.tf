@@ -54,14 +54,14 @@ resource "spacelift_context_attachment" "lambda_terraform" {
 }
 
 resource "spacelift_environment_variable" "capability_iam" {
-  context_id = spacelift_context.lambda_cf.id
+  context_id = spacelift_context.capability.id
   name       = "CF_CAPABILITY_IAM"
   value      = "1"
   write_only = false
 }
 
 resource "spacelift_environment_variable" "capability_named_iam" {
-  context_id = spacelift_context.lambda_cf.id
+  context_id = spacelift_context.capability.id
   name       = "CF_CAPABILITY_NAMED_IAM"
   value      = "1"
   write_only = false
