@@ -35,7 +35,7 @@ resource "spacelift_context" "capability" {
   space_id = data.spacelift_space_by_path.development.id
 }
 
-resource "spacelift_context_attachment" "app_cdk" {
+resource "spacelift_context_attachment" "app_cdk_capability" {
   context_id = spacelift_context.capability.id
   stack_id   = spacelift_stack.app_cdk.id
   priority   = 0
