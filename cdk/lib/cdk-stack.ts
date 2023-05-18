@@ -11,7 +11,7 @@ export class CdkStack extends Stack {
       vpcId: "vpc-04067621ba51a40e8"
     });
 
-    const instance = new ec2.Instance(this, 'Instance', {
+    const instance2 = new ec2.Instance(this, 'Instance2', {
       vpc,
       instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
       machineImage: ec2.MachineImage.latestAmazonLinux2023(),
