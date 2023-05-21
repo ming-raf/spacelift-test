@@ -30,12 +30,6 @@ resource "spacelift_stack" "app_cdk" {
   labels = [ "infracost" ]
 }
 
-resource "spacelift_drift_detection" "app_cdk" {
-  reconcile = true
-  stack_id  = spacelift_stack.app_cdk.id
-  schedule  = ["*/1 * * * *"]
-}
-
 resource "spacelift_run" "app_cdk" {
   stack_id = spacelift_stack.app_cdk.id
 
@@ -80,12 +74,6 @@ resource "spacelift_stack" "lambda_terraform" {
   worker_pool_id = spacelift_worker_pool.aws_ec2.id
   project_root = "terraform"
   labels = [ "infracost" ]
-}
-
-resource "spacelift_drift_detection" "lambda_terraform" {
-  reconcile = true
-  stack_id  = spacelift_stack.lambda_terraform.id
-  schedule  = ["*/1 * * * *"]
 }
 
 output "app_cdk_stack_id" {
