@@ -72,14 +72,14 @@ resource "aws_route" "internet_gateway_route" {
 }
 
 # Create a NAT gateway for the private subnet
-resource "aws_nat_gateway" "nat_gateway" {
-  allocation_id = aws_eip.eip.id
-  subnet_id     = aws_subnet.public_subnet.id
+# resource "aws_nat_gateway" "nat_gateway" {
+#   allocation_id = aws_eip.eip.id
+#   subnet_id     = aws_subnet.public_subnet.id
 
-  tags = {
-    Name = "nat-gateway"
-  }
-}
+#   tags = {
+#     Name = "nat-gateway"
+#   }
+# }
 
 # Create an Elastic IP for the NAT gateway
 resource "aws_eip" "eip" {
@@ -91,11 +91,11 @@ resource "aws_eip" "eip" {
 }
 
 # Create a route for the NAT gateway in the route table
-resource "aws_route" "nat_gateway_route" {
-  route_table_id         = aws_route_table.private_route_table.id
-  destination_cidr_block = "0.0.0.0/0" # Route all traffic to the NAT gateway
-  nat_gateway_id         = aws_nat_gateway.nat_gateway.id
-}
+# resource "aws_route" "nat_gateway_route" {
+#   route_table_id         = aws_route_table.private_route_table.id
+#   destination_cidr_block = "0.0.0.0/0" # Route all traffic to the NAT gateway
+#   nat_gateway_id         = aws_nat_gateway.nat_gateway.id
+# }
 
 resource "aws_security_group" "open_sg" {
   description = "Open all security group"
