@@ -38,6 +38,11 @@ resource "spacelift_run" "app_cdk" {
   }
 }
 
+resource "spacelift_drift_detection" "app_cdk" {
+  reconcile = true
+  stack_id  = spacelift_stack.app_cdk.id
+  schedule  = ["*/1 * * * *"]
+}
 
 resource "spacelift_stack" "lambda_cf" {
 
