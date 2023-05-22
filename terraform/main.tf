@@ -20,6 +20,15 @@ resource "aws_instance" "example" {
   }
 }
 
+resource "aws_instance" "example2" {
+  ami           = "ami-0dccf6019d76274e9"
+  instance_type = "t4g.micro"
+
+  tags = {
+    Name = "example-instance-2"
+  }
+}
+
 resource "aws_api_gateway_rest_api" "example_api" {
   name        = "example-api"
   description = "Example API Gateway"
