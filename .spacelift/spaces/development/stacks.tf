@@ -81,6 +81,29 @@ resource "spacelift_stack" "lambda_terraform" {
   labels = [ "infracost" ]
 }
 
+resource "spacelift_stack" "lambda_terraform_2" {
+
+  github_enterprise {
+    namespace = "ming-raf"
+  }
+
+  autodeploy     = true
+  space_id       = data.spacelift_space_by_path.development.id
+  branch         = "main"
+  name           = "Lambda Terraform 2"
+  repository     = "spacelift-test"
+  worker_pool_id = spacelift_worker_pool.aws_ec2.id
+  project_root = "terraform"
+  labels = [ "infracost" ]
+}
+
+resource "spacelift_drift_detection" "lambda_terraform" {
+  reconcile = true
+  stack_id  = spacelift_stack.lambda_terraform.id
+  schedule  = ["*/1 * * * *"]
+  ignore_state = true
+}
+
 output "app_cdk_stack_id" {
   description = "app_cdk stack id"
   value       = spacelift_stack.app_cdk.id
