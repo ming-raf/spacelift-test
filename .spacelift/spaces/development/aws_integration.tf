@@ -22,7 +22,8 @@ resource "aws_iam_role" "this" {
     Statement = [
       jsondecode(data.spacelift_aws_integration_attachment_external_id.this.assume_role_policy_statement),
       jsondecode(data.spacelift_aws_integration_attachment_external_id.lambda_cf.assume_role_policy_statement),
-      jsondecode(data.spacelift_aws_integration_attachment_external_id.lambda_terraform.assume_role_policy_statement)
+      jsondecode(data.spacelift_aws_integration_attachment_external_id.lambda_terraform.assume_role_policy_statement),
+      jsondecode(data.spacelift_aws_integration_attachment_external_id.lambda_terraform_2.assume_role_policy_statement)
     ]
   })
 }
@@ -85,6 +86,24 @@ data "spacelift_aws_integration_attachment_external_id" "lambda_terraform" {
 resource "spacelift_aws_integration_attachment" "lambda_terraform" {
   integration_id = spacelift_aws_integration.this.id
   stack_id       = spacelift_stack.lambda_terraform.id
+  read           = true
+  write          = true
+
+  depends_on = [
+    aws_iam_role.this
+  ]
+}
+
+data "spacelift_aws_integration_attachment_external_id" "lambda_terraform_2" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = spacelift_stack.lambda_terraform_2.id
+  read           = true
+  write          = true
+}
+
+resource "spacelift_aws_integration_attachment" "lambda_terraform_2" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = spacelift_stack.lambda_terraform_2.id
   read           = true
   write          = true
 

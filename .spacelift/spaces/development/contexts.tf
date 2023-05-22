@@ -53,6 +53,12 @@ resource "spacelift_context_attachment" "lambda_terraform" {
   priority   = 0
 }
 
+resource "spacelift_context_attachment" "lambda_terraform_2" {
+  context_id = spacelift_context.capability.id
+  stack_id   = spacelift_stack.lambda_terraform_2.id
+  priority   = 0
+}
+
 resource "spacelift_environment_variable" "capability_iam" {
   context_id = spacelift_context.capability.id
   name       = "CF_CAPABILITY_IAM"
