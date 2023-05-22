@@ -85,6 +85,7 @@ resource "spacelift_drift_detection" "lambda_terraform" {
   reconcile = true
   stack_id  = spacelift_stack.lambda_terraform.id
   schedule  = ["*/1 * * * *"]
+  ignore_state = true
 }
 
 output "app_cdk_stack_id" {
