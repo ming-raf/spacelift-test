@@ -88,7 +88,7 @@ resource "spacelift_drift_detection" "lambda_terraform" {
   ignore_state = true
 }
 
-module "cdk-stack-2" {
+module "cdk_stack_2" {
   source  = "spacelift.io/rafiqi/cdk-stack-2/default"
   version = "0.1.0"
 
@@ -101,11 +101,22 @@ module "cdk-stack-2" {
   repository           = "spacelift-test"
 }
 
-data "spacelift_aws_integration_attachment_external_id" "cdk-stack-2" {
+data "spacelift_aws_integration_attachment_external_id" "cdk_stack_2" {
   integration_id = spacelift_aws_integration.this.id
-  stack_id       = module.cdk-stack-2.stack_id
+  stack_id       = module.cdk_stack_2.stack_id
   read           = true
   write          = true
+}
+
+resource "spacelift_aws_integration_attachment" "cdk_stack_2" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = module.cdk_stack_2.stack_id
+  read           = true
+  write          = true
+
+  depends_on = [
+    aws_iam_role.this
+  ]
 }
 
 output "app_cdk_stack_id" {
