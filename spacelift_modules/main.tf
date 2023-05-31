@@ -57,13 +57,6 @@ resource "spacelift_stack" "cdk_stack" {
   labels = [ "infracost" ]
 }
 
-data "spacelift_aws_integration_attachment_external_id" "cdk_stack" {
-  integration_id = var.spacelift_aws_integrations_id
-  stack_id       = spacelift_stack.cdk_stack.id
-  read           = true
-  write          = true
-}
-
 resource "spacelift_aws_integration_attachment" "cdk_stack" {
   integration_id = var.spacelift_aws_integrations_id
   stack_id       = spacelift_stack.cdk_stack.id
@@ -81,4 +74,8 @@ resource "spacelift_context_attachment" "app_cdk_capability" {
   context_id = "iam-capability"
   stack_id   = spacelift_stack.cdk_stack.id
   priority   = 0
+}
+
+output "stack_id" {
+  value = spacelift_stack.cdk_stack.id
 }
