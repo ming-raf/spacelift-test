@@ -88,8 +88,6 @@ resource "spacelift_drift_detection" "lambda_terraform" {
   ignore_state = true
 }
 
-variable "spacelift_stack_id" {}
-
 module "cdk-stack-2" {
   source  = "spacelift.io/rafiqi/cdk-stack-2/default"
   version = "0.1.0"
