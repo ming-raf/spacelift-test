@@ -57,6 +57,13 @@ resource "spacelift_stack" "cdk_stack" {
   labels = [ "infracost" ]
 }
 
+resource "spacelift_aws_integration_attachment" "cdk_stack" {
+  integration_id = var.spacelift_aws_integrations_id
+  stack_id       = spacelift_stack.cdk_stack.id
+  read           = true
+  write          = true
+}
+
 resource "spacelift_context_attachment" "app_cdk" {
   context_id = "manual"
   stack_id   = spacelift_stack.cdk_stack.id
