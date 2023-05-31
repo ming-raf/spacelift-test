@@ -22,8 +22,8 @@ resource "aws_iam_role" "this" {
     Statement = [
       jsondecode(data.spacelift_aws_integration_attachment_external_id.this.assume_role_policy_statement),
       jsondecode(data.spacelift_aws_integration_attachment_external_id.lambda_cf.assume_role_policy_statement),
-      jsondecode(data.spacelift_aws_integration_attachment_external_id.lambda_terraform.assume_role_policy_statement),
-      jsondecode(data.spacelift_aws_integration_attachment_external_id.cdk-stack-2.assume_role_policy_statement)
+      jsondecode(data.spacelift_aws_integration_attachment_external_id.lambda_terraform.assume_role_policy_statement)
+      # jsondecode(data.spacelift_aws_integration_attachment_external_id.cdk-stack-2.assume_role_policy_statement)
     ]
   })
 }

@@ -38,17 +38,17 @@ resource "spacelift_stack" "cdk_stack" {
   labels = [ "infracost" ]
 }
 
-resource "spacelift_context_attachment" "app_cdk" {
-  context_id = "manual"
-  stack_id   = spacelift_stack.cdk_stack.id
-  priority   = 0
-}
+# resource "spacelift_context_attachment" "app_cdk" {
+#   context_id = "manual"
+#   stack_id   = spacelift_stack.cdk_stack.id
+#   priority   = 0
+# }
 
-resource "spacelift_context_attachment" "app_cdk_capability" {
-  context_id = "iam-capability"
-  stack_id   = spacelift_stack.cdk_stack.id
-  priority   = 0
-}
+# resource "spacelift_context_attachment" "app_cdk_capability" {
+#   context_id = "iam-capability"
+#   stack_id   = spacelift_stack.cdk_stack.id
+#   priority   = 0
+# }
 
 resource "spacelift_stack_dependency" "cdk_stack" {
   stack_id            = spacelift_stack.cdk_stack.id
