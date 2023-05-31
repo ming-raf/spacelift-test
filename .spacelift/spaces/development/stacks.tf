@@ -108,6 +108,17 @@ data "spacelift_aws_integration_attachment_external_id" "cdk-stack-2" {
   write          = true
 }
 
+resource "spacelift_aws_integration_attachment" "cdk-stack-2" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = module.cdk-stack-2.stack_id
+  read           = true
+  write          = true
+
+  depends_on = [
+    aws_iam_role.this
+  ]
+}
+
 output "app_cdk_stack_id" {
   description = "app_cdk stack id"
   value       = spacelift_stack.app_cdk.id
