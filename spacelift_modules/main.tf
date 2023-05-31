@@ -39,7 +39,7 @@ resource "spacelift_stack" "cdk_stack" {
   }
 
   autodeploy     = true
-  space_id       = spacelift_space_by_path.development.id
+  space_id       = data.spacelift_space_by_path.development.id
   branch         = "main"
   description    = "Typical CDK stack"
   name           = var.name
