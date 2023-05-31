@@ -90,8 +90,8 @@ resource "spacelift_drift_detection" "lambda_terraform" {
 
 variable "spacelift_stack_id" {}
 
-module "cdk-stack" {
-  source  = "spacelift.io/rafiqi/cdk-stack/default"
+module "cdk-stack-2" {
+  source  = "spacelift.io/rafiqi/cdk-stack-2/default"
   version = "0.1.0"
 
   # Required inputs
