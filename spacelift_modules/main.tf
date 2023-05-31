@@ -69,11 +69,6 @@ resource "spacelift_aws_integration_attachment" "cdk_stack" {
   stack_id       = spacelift_stack.cdk_stack.id
   read           = true
   write          = true
-
-  # The role needs to exist before we attach since we test role assumption during attachment.
-  depends_on = [
-    aws_iam_role.this
-  ]
 }
 
 resource "spacelift_context_attachment" "app_cdk" {
