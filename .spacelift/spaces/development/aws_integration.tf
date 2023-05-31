@@ -92,3 +92,7 @@ resource "spacelift_aws_integration_attachment" "lambda_terraform" {
     aws_iam_role.this
   ]
 }
+
+output "spacelift_aws_integrations_id" {
+  value = spacelift_aws_integration.this.id
+}

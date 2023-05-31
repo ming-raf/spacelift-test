@@ -66,3 +66,7 @@ resource "spacelift_environment_variable" "capability_named_iam" {
   value      = "1"
   write_only = false
 }
+
+output "spacelift_context_id" {
+  value = spacelift_context.capability.id
+}

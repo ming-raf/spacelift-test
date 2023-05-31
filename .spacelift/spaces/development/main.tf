@@ -20,3 +20,7 @@ provider "aws" {
 data "spacelift_space_by_path" "development" {
   space_path = "root/development"
 }
+
+output "development_space_id" {
+  value = data.spacelift_space_by_path.development.id
+}
