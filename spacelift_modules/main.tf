@@ -69,6 +69,11 @@ resource "spacelift_context_attachment" "app_cdk_capability" {
   priority   = 0
 }
 
+resource "spacelift_stack_dependency" "cdk_stack" {
+  stack_id            = spacelift_stack.cdk_stack.id
+  depends_on_stack_id = data.spacelift_stack.dev_admin_stack.id
+}
+
 output "stack_id" {
   value = spacelift_stack.cdk_stack.id
 }
