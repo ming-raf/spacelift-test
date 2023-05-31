@@ -54,6 +54,10 @@ resource "spacelift_space" "live" {
 }
 
 resource "spacelift_module" "cdk_stack" {
+  github_enterprise {
+    namespace = "ming-raf"
+  }
+
   name               = "cdk-stack"
   administrative     = true
   branch             = "main"
