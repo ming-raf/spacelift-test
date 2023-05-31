@@ -52,3 +52,11 @@ resource "spacelift_space" "live" {
   # An optional description of a space.
   description = "This a child of the root space. It contains all the resources common to the live infrastructure."
 }
+
+resource "spacelift_module" "cdk_stack" {
+  name               = "cdk-stack"
+  administrative     = true
+  branch             = "main"
+  description        = "Deploy pre-configured CDK stack"
+  repository         = "spacelift-test"
+}
