@@ -21,3 +21,13 @@ variable "project_root" {
 variable "repository" {
   type = string
 }
+
+variable "worker_pool_id" {
+  type = string
+  default = "01H0AYQ6M69AC4JB36KWA2TJTF"
+}
+
+variable "spacelift_aws_integrations_id" {
+  type = string
+  default = "01H0AYQ884Q5B7HK4992P48R0X"
+}
