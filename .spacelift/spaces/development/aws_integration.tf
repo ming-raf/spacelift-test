@@ -20,13 +20,10 @@ resource "aws_iam_role" "this" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          AWS = "*"
-        }
-      },
+      jsondecode(data.spacelift_aws_integration_attachment_external_id.this.assume_role_policy_statement),
+      jsondecode(data.spacelift_aws_integration_attachment_external_id.lambda_cf.assume_role_policy_statement),
+      jsondecode(data.spacelift_aws_integration_attachment_external_id.lambda_terraform.assume_role_policy_statement),
+      jsondecode(data.spacelift_aws_integration_attachment_external_id.spacelift_aws_integration_attachment_external_id.assume_role_policy_statement)
     ]
   })
 }
