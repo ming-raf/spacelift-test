@@ -57,6 +57,7 @@ resource "spacelift_module" "cdk_stack" {
   name               = "cdk-stack"
   administrative     = true
   branch             = "main"
+  project_root       = "spacelift_modules"
   description        = "Deploy pre-configured CDK stack"
   repository         = "spacelift-test"
 }
