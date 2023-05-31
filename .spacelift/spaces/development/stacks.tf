@@ -88,6 +88,19 @@ resource "spacelift_drift_detection" "lambda_terraform" {
   ignore_state = true
 }
 
+module "cdk-stack-2" {
+  source  = "spacelift.io/rafiqi/cdk-stack-2/default"
+  version = "0.1.0"
+
+  # Required inputs
+  cfn_stack_name       = "CDKStack2"
+  dev_admin_stack_name = var.spacelift_stack_id
+  entry_template_file  = "cdk.out/CdkStack.template.json"
+  name                 = "CDK Application 2"
+  project_root         = "cdk"
+  repository           = "spacelift-test"
+}
+
 output "app_cdk_stack_id" {
   description = "app_cdk stack id"
   value       = spacelift_stack.app_cdk.id
