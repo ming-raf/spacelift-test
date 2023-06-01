@@ -150,6 +150,38 @@ resource "spacelift_aws_integration_attachment" "cdk-stack-3" {
   ]
 }
 
+module "cdk-stack-4" {
+  source  = "spacelift.io/rafiqi/cdk-stack-2/default"
+  version = "0.1.0"
+
+  # Required inputs
+  cfn_stack_name       = "CDKStack4"
+  dev_admin_stack_name = var.spacelift_stack_id
+  entry_template_file  = "cdk.out/CdkStack.template.json"
+  name                 = "CDK Application 4"
+  project_root         = "cdk"
+  repository           = "spacelift-test"
+}
+
+data "spacelift_aws_integration_attachment_external_id" "cdk-stack-4" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = module.cdk-stack-4.stack_id
+  read           = true
+  write          = true
+}
+
+resource "spacelift_aws_integration_attachment" "cdk-stack-4" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = module.cdk-stack-4.stack_id
+  read           = true
+  write          = true
+
+  depends_on = [
+    aws_iam_role.this
+  ]
+}
+
+
 
 output "app_cdk_stack_id" {
   description = "app_cdk stack id"
